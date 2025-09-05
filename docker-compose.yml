@@ -3,8 +3,8 @@ services:
     container_name: influxdb3-core
     image: influxdb:3-core
     restart: unless-stopped
-    ports:
-      - 8181:8181 # InfluxDB 3 API Port
+    #ports:
+    #  - 8181:8181 # InfluxDB 3 API Port
     command:
       - influxdb3
       - serve
