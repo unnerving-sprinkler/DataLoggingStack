@@ -20,12 +20,12 @@ services:
     restart: unless-stopped
 
   explorer:
-    image: influxdata/influxdb3-ui:1.2.0
+    image: influxdata/influxdb3-ui
     container_name: influxdb3-explorer
+    command: ["--mode=admin"]
     ports:
-      - "8888:80"
-    volumes:
-      - ./config:/app-root/config:ro
+      - "8888:80"      # UI Web interface
+      - "8889:8888"    # FlightSQL / gRPC API endpoint
     restart: unless-stopped
 
   cloudflared:
