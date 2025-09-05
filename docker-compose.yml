@@ -3,7 +3,7 @@ services:
     container_name: influxdb3-core
     image: influxdb:3-core
     ports:
-      - 8181:8181
+      - 127.0.0.1:8181:8181 # Bind port to localhost only for security
     command:
       - influxdb3
       - serve
@@ -26,8 +26,8 @@ services:
     container_name: influxdb3-explorer
     command: ["--mode=admin"]
     ports:
-      - "8888:80"      # UI Web interface
-      - "8889:8888"    # FlightSQL / gRPC API endpoint
+      - "127.0.0.1:8888:80"      # UI Web interface
+      - "127.0.0.1:8889:8888"    # FlightSQL / gRPC API endpoint
     restart: unless-stopped
     #environment:
     #  - INFLUXDB_URL=http://influxdb3-core:8181
