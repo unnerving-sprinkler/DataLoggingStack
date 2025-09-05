@@ -1,4 +1,6 @@
-"DEFAULT_INFLUX_SERVER": "http://host.docker.internal:8181",
-"DEFAULT_INFLUX_DATABASE": "mydb",
-"DEFAULT_API_TOKEN": ${INFLUXDB_TOKEN},
-"DEFAULT_SERVER_NAME": "Local InfluxDB 3"
+{
+  "DEFAULT_INFLUX_SERVER": "http://host.docker.internal:8181",
+  "DEFAULT_INFLUX_DATABASE": "mydb",
+  "DEFAULT_API_TOKEN": ${INFLUXDB_TOKEN},
+  "DEFAULT_SERVER_NAME": "Local InfluxDB 3"
+}
