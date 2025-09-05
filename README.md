@@ -16,8 +16,8 @@ cd DataLoggingStack
 ## Start InfluxDB
 Start just the InfluxDB Instance and generate a ADMIN token, this is a new step that is needed in Influx3Core
 ```sh
-docker-compose up -d influxdb3-core
-docker-compose exec influxdb3-core influxdb3 create token --admin
+docker compose up -d influxdb3-core
+docker compose exec influxdb3-core influxdb3 create token --admin
 ```
 
 Copy the token and paste it into the .env file under *INFLUXDB_TOKEN=*
