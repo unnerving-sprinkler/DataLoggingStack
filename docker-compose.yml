@@ -44,5 +44,7 @@ services:
 volumes:
   influxdb_data:
 
+networks:
+  mynet:
 
 
