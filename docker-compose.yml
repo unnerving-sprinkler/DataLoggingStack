@@ -19,6 +19,18 @@ services:
       retries: 3
     restart: unless-stopped
 
+  explorer:
+    image: influxdata/influxdb3-ui:1.2.0
+    container_name: influxdb3-explorer
+    ports:
+      - "8888:80"
+    volumes:
+      - explorer_data:/app-root/config:ro
+    restart: unless-stopped
+
 volumes:
-  influxdb_data
+  influxdb_data:
+  explorer_data:
+
+
 
