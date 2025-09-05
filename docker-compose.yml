@@ -28,13 +28,9 @@ services:
     # ports: # Not Exposed to the Public Internet, Access via Cloudflared Tunnel. If Not Using Cloudflared, Uncomment this line to expose the UI on port 8888
     #   - "8888:80"      
     restart: unless-stopped
-    environment:
-      - INFLUXDB_URL=http://influxdb3-core:8181
-      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
-    volumes: # Persist Configuration
-      - explorer_data:/db:rw
-     # - ./config:/app-root/config:ro
-
+    volumes: 
+      - explorer_data:/db:rw #Persist Configuration
+      - ./config:/app-root/config:ro #First Time Setup Configuration
     networks:
       - mynet
 
