@@ -25,9 +25,8 @@ services:
     image: influxdata/influxdb3-ui
     container_name: influxdb3-explorer
     command: ["--mode=admin"]
-    ports:
-      - "127.0.0.1:8888:80"      # UI Web interface
-      - "127.0.0.1:8889:8888"    # FlightSQL / gRPC API endpoint
+    # ports: # Not Exposed to the Public Internet, Access via Cloudflared Tunnel. If Not Using Cloudflared, Uncomment this line to expose the UI on port 8888
+    #   - "8888:80"      
     restart: unless-stopped
     #environment:
     #  - INFLUXDB_URL=http://influxdb3-core:8181
