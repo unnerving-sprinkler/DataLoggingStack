@@ -25,12 +25,17 @@ services:
     ports:
       - "8888:80"
     volumes:
-      - explorer_data:/app-root/config:ro
+      - ./config:/app-root/config:ro
     restart: unless-stopped
+
+    cloudflared:
+      image: cloudflare/cloudflared:latest
+      container_name: cloudflared
+      command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+      restart: unless-stopped
 
 volumes:
   influxdb_data:
-  explorer_data:
 
 
 
