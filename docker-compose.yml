@@ -29,9 +29,9 @@ services:
       - "8888:80"      # UI Web interface
       - "8889:8888"    # FlightSQL / gRPC API endpoint
     restart: unless-stopped
-    #environment:
-    #  - INFLUXDB_URL=http://influxdb3-core:8086
-    #  - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+    environment:
+      - INFLUXDB_URL=http://influxdb3-core:8181
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
     networks:
       - mynet
 
