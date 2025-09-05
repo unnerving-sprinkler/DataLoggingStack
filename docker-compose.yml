@@ -30,7 +30,6 @@ services:
     command: ["--mode=admin"]
     volumes: 
       - explorer_data:/db:rw #Persist Configuration
-      - ./config:/app-root/config:ro #First Time Setup Configuration
     networks:
       - mynet
 

@@ -1,6 +1,0 @@
-{
-  "DEFAULT_INFLUX_SERVER": "http://influxdb3-core:8181",
-  "DEFAULT_INFLUX_DATABASE": "${INFLUXDB_BUCKET}",
-  "DEFAULT_API_TOKEN": "${INFLUXDB_TOKEN}",
-  "DEFAULT_SERVER_NAME": "yourservername"
-}
