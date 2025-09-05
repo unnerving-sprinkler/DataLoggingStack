@@ -3,7 +3,7 @@ services:
     container_name: influxdb3-core
     image: influxdb:3-core
     ports:
-      - 127.0.0.1:8181:8181 # Bind port to localhost only for security
+      - 8181:8181 # InfluxDB 3 API Port
     command:
       - influxdb3
       - serve
@@ -28,9 +28,8 @@ services:
     # ports: # Not Exposed to the Public Internet, Access via Cloudflared Tunnel. If Not Using Cloudflared, Uncomment this line to expose the UI on port 8888
     #   - "8888:80"      
     restart: unless-stopped
-    #environment:
-    #  - INFLUXDB_URL=http://influxdb3-core:8181
-    #  - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+    volumes: # Persist Configuration
+      - expplorer_data:/db:rw
     networks:
       - mynet
 
@@ -44,6 +43,7 @@ services:
 
 volumes:
   influxdb_data:
+  expplorer_data:
 
 networks:
   mynet:
