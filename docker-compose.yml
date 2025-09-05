@@ -1,5 +1,5 @@
 services:
-  influxdb3-core:
+  influxdb3-core: # Setup The InfluxDB 3 Core Instance
     container_name: influxdb3-core
     image: influxdb:3-core
     ports:
@@ -21,7 +21,7 @@ services:
     networks:
       - mynet
 
-  explorer:
+  explorer: # Explorer Is a Web UI for InfluxDB 3
     image: influxdata/influxdb3-ui
     container_name: influxdb3-explorer
     command: ["--mode=admin"]
@@ -29,13 +29,13 @@ services:
       - "8888:80"      # UI Web interface
       - "8889:8888"    # FlightSQL / gRPC API endpoint
     restart: unless-stopped
-    environment:
-      - INFLUXDB_URL=http://influxdb3-core:8181
-      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+    #environment:
+    #  - INFLUXDB_URL=http://influxdb3-core:8181
+    #  - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
     networks:
       - mynet
 
-  cloudflared:
+  cloudflared: # Remote Access to Exolrer
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
