@@ -29,7 +29,9 @@ services:
     #   - "8888:80"      
     restart: unless-stopped
     volumes: # Persist Configuration
-      - expplorer_data:/db:rw
+      - explorer_data:/db:rw
+      - ./config:/app-root/config:ro
+
     networks:
       - mynet
 
@@ -43,7 +45,7 @@ services:
 
 volumes:
   influxdb_data:
-  expplorer_data:
+  explorer_data:
 
 networks:
   mynet:
