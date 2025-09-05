@@ -2,6 +2,7 @@ services:
   influxdb3-core: # Setup The InfluxDB 3 Core Instance
     container_name: influxdb3-core
     image: influxdb:3-core
+    restart: unless-stopped
     ports:
       - 8181:8181 # InfluxDB 3 API Port
     command:
@@ -17,17 +18,16 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    restart: unless-stopped
     networks:
       - mynet
 
   explorer: # Explorer Is a Web UI for InfluxDB 3
-    image: influxdata/influxdb3-ui
     container_name: influxdb3-explorer
-    command: ["--mode=admin"]
-    # ports: # Not Exposed to the Public Internet, Access via Cloudflared Tunnel. If Not Using Cloudflared, Uncomment this line to expose the UI on port 8888
-    #   - "8888:80"      
+    image: influxdata/influxdb3-ui
     restart: unless-stopped
+    # ports: # Not Exposed to the Public Internet, Access via Cloudflared Tunnel. If Not Using Cloudflared, Uncomment this line to expose the UI on port 8888
+    #   - "8888:80"  
+    command: ["--mode=admin"]
     volumes: 
       - explorer_data:/db:rw #Persist Configuration
       - ./config:/app-root/config:ro #First Time Setup Configuration
@@ -35,16 +35,28 @@ services:
       - mynet
 
   cloudflared: # Remote Access to Exolrer
-    image: cloudflare/cloudflared:latest
     container_name: cloudflared
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    image: cloudflare/cloudflared:latest
     restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - mynet
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    #ports:
+    #  - 3000:3000 # Uncomment to expose Grafana on port 3000
+    volumes:
+      - grafana_data:/var/lib/grafana
     networks:
       - mynet
 
 volumes:
   influxdb_data:
   explorer_data:
+  grafana_data:
 
 networks:
   mynet:
