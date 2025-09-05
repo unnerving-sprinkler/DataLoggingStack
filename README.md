@@ -20,7 +20,19 @@ docker compose up -d influxdb3-core
 docker compose exec influxdb3-core influxdb3 create token --admin
 ```
 
-Copy the token and paste it into the .env file under *INFLUXDB_TOKEN=* (No Quotes Needed)
+Copy the token and paste it into .env file under *INFLUXDB_TOKEN=* (No Quotes Needed)
+
+## 3) Setup Cloudflare Access (If Using)
+Configure a tunnel in cloudflare zero trust and apply a security application if needed, copy the token for the zero trust tunnel and past it into the .env file. 
+
+**If running locally and not using cloudflare to access you must uncomment the following lines in docker-compose.yml**
+```sh
+ports: # Not Exposed to the Public Internet, Access via Cloudflared Tunnel. If Not Using Cloudflared, Uncomment this line to expose the UI on port 8888
+  - "8888:80"     
+```
+
+## 4) Setup InfluxDB3 Explorer
+
 
 ## Resources
 This guide is based on a guide made by [influx community](https://github.com/InfluxCommunity/TIG-Stack-using-InfluxDB-3/tree/main)
